@@ -1,0 +1,48 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "saxParser",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "cwd":"${workspaceFolder}/test",
+      "program": "saxParser.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "saxStream",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "cwd":"${workspaceFolder}/test",
+      "program": "saxStream.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "getCells",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "cwd":"${workspaceFolder}/test",
+      "program": "getCells.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "testDataParser",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "cwd":"${workspaceFolder}/test",
+      "program": "testDataParser.js"
+    }
+  ]
+}

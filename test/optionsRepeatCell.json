@@ -1,0 +1,9 @@
+{
+  "url": "./data/html/state_voter_registration_jan2024.html",
+  "output": "./output/cli/repeat_cell.json",
+  "format": "json",
+  "pages": [ 1 ],
+  "pageHeader": 64,
+  "cells": 7,
+  "RepeatCell.column": 0
+}
