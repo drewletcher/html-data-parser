@@ -12,7 +12,8 @@ async function test(options) {
     let outputName = path.parse(options.url || options.data).name;
 
     if (options.data) {
-      options.data = new Uint8Array(fs.readFileSync(options.data));
+      options.data = fs.readFileSync(options.data);
+      //options.data = new Uint8Array(fs.readFileSync(options.data));
       outputName += "_data";
     }
 
@@ -24,8 +25,8 @@ async function test(options) {
     fs.mkdirSync(path.dirname(outputFile), { recursive: true });
     fs.writeFileSync(outputFile, JSON.stringify(rows, null, 2));
 
-    let expected = outputFile.replace("/output/", "/expected/");
-    let exitCode = compareFiles(expected, outputFile, 2);
+    let expectedFile = outputFile.replace("/output/", "/expected/");
+    let exitCode = compareFiles(outputFile, expectedFile, 2);
     return exitCode;
   }
   catch (err) {
@@ -35,5 +36,8 @@ async function test(options) {
 
 (async () => {
   if (await test({ url: "./data/html/texas_jan2024.shtml" })) return 1;
-  //if (await test({ url: "https://www.sos.state.tx.us/elections/historical/jan2024.shtml" })) return 1;
+  if (await test({ url: "https://www.sos.state.tx.us/elections/historical/jan2024.shtml" })) return 1;
+  if (await test({ data: "./data/html/texas_jan2024.shtml" })) return 1;
+
+  if (await test({ url: "./data/html/ansi.html", heading: "Congressional Districts" })) return 1;
 })();
