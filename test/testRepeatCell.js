@@ -1,5 +1,5 @@
 /**
- * test/testRepeatCell.js
+ * test/optionsRepeatCell.js
  */
 
 const { HtmlDataReader, RowAsObjectTransform, RepeatCellTransform } = require("../lib");
@@ -31,7 +31,7 @@ async function test(options) {
 
 (async () => {
   if (await test({
-    url: "./test/data/pdf/state_voter_registration_jan2024.html",
+    url: "./test/data/html/state_voter_registration_jan2024.html",
     pages: [ 1 ],
     pageHeader: 64,
     cells: 7,

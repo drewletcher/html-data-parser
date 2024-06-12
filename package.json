@@ -15,11 +15,11 @@
   },
   "main": "lib/index.js",
   "scripts": {
-    "test": "test/testDataParser.js"
+    "test": "testrunner.bat"
   },
   "bin": {
-    "hdp": "html-data-parser.js",
-    "htmldataparser": "html-data-parser.js"
+    "hdp": "./html-data-parser.js",
+    "htmldataparser": "./html-data-parser.js"
   },
   "repository": {
     "type": "git",

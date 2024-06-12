@@ -1,5 +1,5 @@
 /**
- * test/testRepeatHeading.js
+ * test/optionsRepeatHeading.js
  */
 
 const { HtmlDataReader, RowAsObjectTransform, RepeatHeadingTransform } = require("../lib");
@@ -31,7 +31,7 @@ async function test(options) {
 
 (async () => {
   if (await test({
-    url: "./test/data/pdf/state_voter_registration_jan2024.html",
+    url: "./test/data/html/state_voter_registration_jan2024.html",
     pages: [ 2,3,4,5 ],
     pageHeader: 48,
     heading: "Active",

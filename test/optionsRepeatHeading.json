@@ -1,6 +1,6 @@
 {
-  "url": "./test/data/pdf/state_voter_registration_jan2024.html",
-  "output": "./test/output/cli/repeat_heading.json",
+  "url": "./test/data/html/texas_jan2024.shtml",
+  "output": "./test/output/hdp/repeat_heading.json",
   "format": "json",
   "pages": "2-5",
   "pageHeader": 48,
