@@ -26,8 +26,6 @@ var options = {
   format: "json",
   output: "",
   cells: 1,
-  lineHeight: 1.67,
-  orderXY: true,
   trim: true
 }
 
@@ -60,10 +58,10 @@ async function parseArgs() {
         options.pages = nv[ 1 ];
       else if (nv[ 0 ] === "--heading")
         options.heading = nv[ 1 ];
+      else if (nv[ 0 ] === "--id")
+        options.id = nv[ 1 ];
       else if (nv[ 0 ].includes("--headers"))
         options.headers = nv[ 1 ].split(",");
-      else if (nv[ 0 ].startsWith("--repeating"))
-        options.repeatingHeaders = true;
       else if (nv[ 0 ] === "--format")
         options.format = nv[ 1 ];
     }
@@ -109,15 +107,16 @@ async function parseArgs() {
     console.log("");
     console.log("Parse tabular data from a HTML file.");
     console.log("");
-    console.log("hdp [--options=filename.json] <filename.html|URL> [<output>] [--cells=#] [--heading=title] [--headers=name1,name2,...] [--format=json|csv|rows]");
+    console.log("hdp [--options=filename.json] <filename.html|URL> [<output>] [--heading=title] [--id=name] [--cells=#] [--headers=name1,name2,...] [--format=json|csv|rows]");
     console.log("");
     console.log("  --options    - file containing JSON object with hdp options, optional.");
     console.log("  filename|URL - path name or URL of HTML file to process, required.");
     console.log("  output       - local path name for output of parsed data, default stdout.");
-    console.log("  --format     - output data format JSON, CSV or rows (JSON arrays), default JSON.");
-    console.log("  --cells      - minimum number of cells for a data row, default = 1.");
     console.log("  --heading    - text of heading to find in document that precedes desired data table, default none.");
+    console.log("  --id         - TABLE element id attribute to find in document.");
+    console.log("  --cells      - minimum number of cells for a data row, default = 1.");
     console.log("  --headers    - comma separated list of column names for data, default none first table row contains names.");
+    console.log("  --format     - output data format JSON, CSV or rows (JSON arrays), default JSON.");
     console.log("");
     return;
   }
