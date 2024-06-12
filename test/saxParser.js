@@ -50,7 +50,7 @@ parser.onend = function () {
 // parser.close();
 
 (async () => {
-  let fh = await fs.open("./data/html/texas_jan2024.shtml", "r")
+  let fh = await fs.open("./test/data/html/texas_jan2024.shtml", "r")
 
   while (true) {
     let { bytesRead, buffer } = await fh.read();

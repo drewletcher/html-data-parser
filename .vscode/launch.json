@@ -11,8 +11,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "cwd":"${workspaceFolder}/test",
-      "program": "saxParser.js"
+      "program": "${workspaceFolder}/test/saxParser.js"
     },
     {
       "type": "node",
@@ -21,8 +20,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "cwd":"${workspaceFolder}/test",
-      "program": "saxStream.js"
+      "program": "${workspaceFolder}/test/saxStream.js"
     },
     {
       "type": "node",
@@ -31,8 +29,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "cwd":"${workspaceFolder}/test",
-      "program": "getCells.js"
+      "program": "${workspaceFolder}/test/getCells.js"
     },
     {
       "type": "node",
@@ -41,8 +38,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "cwd":"${workspaceFolder}/test",
-      "program": "testDataParser.js"
+      "program": "${workspaceFolder}/test/testDataParser.js"
     }
   ]
 }

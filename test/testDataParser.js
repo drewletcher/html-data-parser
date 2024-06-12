@@ -20,7 +20,7 @@ async function test(options) {
     let parser = new HtmlDataParser(options);
     let rows = await parser.parse();
 
-    let outputFile = "./output/HtmlDataParser/" + outputName + ".json";
+    let outputFile = "./test/output/HtmlDataParser/" + outputName + ".json";
     console.log("output: " + outputFile);
     fs.mkdirSync(path.dirname(outputFile), { recursive: true });
     fs.writeFileSync(outputFile, JSON.stringify(rows, null, 2));
@@ -35,9 +35,9 @@ async function test(options) {
 }
 
 (async () => {
-  if (await test({ url: "./data/html/texas_jan2024.shtml" })) return 1;
+  if (await test({ url: "./test/data/html/texas_jan2024.shtml" })) return 1;
   if (await test({ url: "https://www.sos.state.tx.us/elections/historical/jan2024.shtml" })) return 1;
-  if (await test({ data: "./data/html/texas_jan2024.shtml" })) return 1;
+  if (await test({ data: "./test/data/html/texas_jan2024.shtml" })) return 1;
 
-  if (await test({ url: "./data/html/ansi.html", heading: "Congressional Districts" })) return 1;
+  if (await test({ url: "./test/data/html/ansi.html", heading: "Congressional Districts" })) return 1;
 })();

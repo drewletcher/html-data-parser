@@ -109,7 +109,7 @@ async function parseArgs() {
     console.log("");
     console.log("Parse tabular data from a HTML file.");
     console.log("");
-    console.log("hdp [--options=filename.json] <filename.html|URL> [<output>] [--cells=#] [--heading=title], [--repeating] [--headers=name1,name2,...] [--format=json|csv|rows]");
+    console.log("hdp [--options=filename.json] <filename.html|URL> [<output>] [--cells=#] [--heading=title] [--headers=name1,name2,...] [--format=json|csv|rows]");
     console.log("");
     console.log("  --options    - file containing JSON object with hdp options, optional.");
     console.log("  filename|URL - path name or URL of HTML file to process, required.");

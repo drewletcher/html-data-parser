@@ -7,7 +7,7 @@
 const sax = require("sax");
 const fs = require("node:fs");
 
-var output = fs.openSync("./output/getCells.json", "w");
+var output = fs.openSync("./test/output/getCells.json", "w");
 fs.writeSync(output, "[\n");
 
 //// table processing
@@ -143,5 +143,5 @@ saxStream.on("script", function (s) {
 
 // pipe is supported, and it's readable/writable
 // same chunks coming in also go out.
-fs.createReadStream("./data/html/texas_jan2024.shtml")
+fs.createReadStream("./test/data/html/texas_jan2024.shtml")
   .pipe(saxStream);
