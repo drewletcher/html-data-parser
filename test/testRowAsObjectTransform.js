@@ -10,13 +10,20 @@ const path = require("path");
 const compareFiles = require("./_compareFiles");
 
 async function test(options) {
+  let outputName = path.parse(options.url || options.data).name;
+
+  if (options.data) {
+    options.data = fs.readFileSync(options.data);
+    //options.data = new Uint8Array(fs.readFileSync(options.data));
+    outputName += "_data";
+  }
 
   let reader = new HtmlDataReader(options);
 
   let transform1 = new RowAsObjectTransform(options);
   let transform2 = new FormatJSON();
 
-  let outputFile = "./test/output/RowAsObjectTransform/" + path.parse(options.url).name + ".json";
+  let outputFile = "./test/output/RowAsObjectTransform/" + outputName + ".json";
   console.log("output: " + outputFile);
   fs.mkdirSync(path.dirname(outputFile), { recursive: true });
   let writer = fs.createWriteStream(outputFile, { encoding: "utf-8", autoClose: false });
@@ -29,10 +36,9 @@ async function test(options) {
 }
 
 (async () => {
-  if (await test({ url: "./test/data/html/helloworld.html", headers: [ "Greeting" ] })) return 1;
-  if (await test({ url: "./test/data/html/ClassCodes.html", newlines: false })) return 1;
-  if (await test({ url: "./test/data/html/Nat_State_Topic_File_formats.html", heading: "Government Units File Format", cells: 3, orderXY: false })) return 1;
-  if (await test({ url: "./test/data/html/CoJul22.html", repeatingHeaders: true })) return 1;
-  if (await test({ url: "./test/data/html/CongJul22.html", cells: 12 })) return 1;
-  if (await test({ url: "./test/data/html/state_voter_registration_jan2024.html", pages: [ 3,4,5 ], pageHeader: 64, repeatingHeaders: true })) return 1;
+  if (await test({ url: "./test/data/html/helloworld.html", id: "global", headers: [ "Greeting" ] })) return 1;
+  if (await test({ data: "./test/data/html/helloworld.html", id: "cosmic", headers: [ "BigBang" ] })) return 1;
+  if (await test({ url: "./test/data/html/ansi.html", heading: "Congressional Districts" })) return 1;
+  if (await test({ url: "./test/data/html/texas_jan2024.shtml" })) return 1;
+
 })();

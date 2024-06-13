@@ -35,9 +35,12 @@ async function test(options) {
 }
 
 (async () => {
-  if (await test({ url: "./test/data/html/texas_jan2024.shtml" })) return 1;
+  if (await test({ url: "./test/data/html/helloworld.html", id: "global"})) return 1;
+  if (await test({ url: "https://www.census.gov/library/reference/code-lists/ansi.html" })) return 1;
   if (await test({ url: "https://www.sos.state.tx.us/elections/historical/jan2024.shtml" })) return 1;
+
+  if (await test({ data: "./test/data/html/helloworld.html", id: "cosmic" })) return 1;
+  if (await test({ data: "./test/data/html/ansi.html", heading: "Congressional Districts" })) return 1;
   if (await test({ data: "./test/data/html/texas_jan2024.shtml" })) return 1;
 
-  if (await test({ url: "./test/data/html/ansi.html", heading: "Congressional Districts" })) return 1;
 })();

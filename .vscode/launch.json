@@ -32,13 +32,129 @@
       "program": "${workspaceFolder}/test/getCells.js"
     },
     {
+      "type": "node-terminal",
+      "name": "---",
+      "request": "launch"
+    },
+    {
       "type": "node",
       "request": "launch",
-      "name": "testDataParser",
+      "name": "HtmlDataParser",
       "skipFiles": [
         "<node_internals>/**"
       ],
       "program": "${workspaceFolder}/test/testDataParser.js"
+    },
+    {
+      "type": "node",
+      "name": "HtmlDataReader",
+      "program": "${workspaceFolder}/test/testDataReader.js",
+      "request": "launch",
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "type": "node",
+      "name": "RowAsObjectTransform",
+      "program": "${workspaceFolder}/test/testRowAsObjectTransform.js",
+      "request": "launch",
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "type": "node",
+      "name": "RepeatCellTransform",
+      "program": "${workspaceFolder}/test/testRepeatCell.js",
+      "request": "launch",
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "type": "node",
+      "name": "RepeatHeadingTransform",
+      "program": "${workspaceFolder}/test/testRepeatHeading.js",
+      "request": "launch",
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "type": "node-terminal",
+      "name": "---",
+      "request": "launch"
+    },
+    {
+      "type": "node",
+      "name": "cli helloworld json",
+      "program": "Html-data-parser.js",
+      "args": [ ".\\test\\data\\Html\\helloworld.Html", "--headers=Greating" ],
+      "outputCapture": "std",
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "type": "node",
+      "name": "cli helloworld csv",
+      "program": "Html-data-parser.js",
+      "args": [ ".\\test\\data\\Html\\helloworld.Html", "--headers=Greating", "--format=csv" ],
+      "outputCapture": "std",
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "type": "node",
+      "name": "cli helloworld rows",
+      "program": "Html-data-parser.js",
+      "args": [ ".\\test\\data\\Html\\helloworld.Html", "--headers=Greating", "--format=rows" ],
+      "outputCapture": "std",
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "type": "node",
+      "name": "cli ClassCodes csv",
+      "program": "Html-data-parser.js",
+      "args": [ ".\\test\\data\\Html\\ClassCodes.Html", ".\\test\\output\\cli\\ClassCodes.csv", "--format=csv" ],
+      "outputCapture": "std",
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "type": "node",
+      "name": "cli ClassCodes json",
+      "program": "Html-data-parser.js",
+      "args": [ ".\\test\\data\\Html\\ClassCodes.Html", ".\\test\\output\\cli\\ClassCodes.json", "--format=json" ],
+      "outputCapture": "std",
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "type": "node",
+      "name": "cli RepeatCell",
+      "program": "Html-data-parser.js",
+      "args": [ "--options=.\\test\\optionsRepeatCell.json" ],
+      "outputCapture": "std",
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "type": "node",
+      "name": "cli RepeatHeading",
+      "program": "Html-data-parser.js",
+      "args": [ "--options=.\\test\\optionsRepeatHeading.json" ],
+      "outputCapture": "std",
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
     }
   ]
 }

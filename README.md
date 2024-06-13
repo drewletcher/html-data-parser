@@ -60,7 +60,7 @@ The options file supports options for all html-data-parser modules.
   "id": "",
   // cells - minimum number of cells for a data row, default = 1.
   "cells": 1,
-  // trim whitespace from output values, false (0) = none, true (1) = both, 2 = starting only, 3 = trailing only, default: true.
+  // trim whitespace from output values, default: true.
   "trim": true,
 
   //// RowAsObjectTransform options
@@ -86,7 +86,7 @@ hdp ./test/data/html/helloworld.html --headers="Greeting" --format=csv
 ```
 
 ```bash
-hdp ./test/data/html/helloworld.html --id="table2" --headers="BigBang"
+hdp ./test/data/html/helloworld.html --id="cosmic" --headers="BigBang"
 ```
 
 ```bash
@@ -116,7 +116,7 @@ optionsRepeatCell.json:
 
 ### HtmlDataParser
 
-HtmlDataParser given a HTML document will output an array of arrays (rows). Additionally, use the streaming classes PdfDataReader and RowAsObjectTransform transform to convert the arrays to Javascript objects.  With default settings HtmlDataParser will output rows in the first TABLE found in the document. Using [HtmlDataParser Options](#html-data-parser-options) the parser can filter content to retrieve the desired data TABLE in the document.
+HtmlDataParser given a HTML document will output an array of arrays (rows). Additionally, use the streaming classes PdfDataReader and RowAsObjectTransform transform to convert the arrays to Javascript objects.  With default settings HtmlDataParser will output rows in __all__ TABLE found in the document. Using [HtmlDataParser Options](#html-data-parser-options) `heading` or `id` the parser can filter content to retrieve the desired data TABLE in the document.
 
 HtmlDataParser only works on a certain subset of HTML documents specifically those that contain some TABLE elements and NOT other table like grid elements. The parser uses [isaacs/sax-js](https://github.com/isaacs/sax-js) library to transform HTML table elements into rows of cells.
 
@@ -141,17 +141,17 @@ HtmlDataParser constructor takes an options object with the following fields. On
 
 `{URL|string} url` - The local path or URL of the HTML document.
 
-`{TypeArray|string} data` - pdf file data in a TypedArray, e.g. `options.data = new Uint8Array(buffer)`.
+`{string} data` - HTML document in a string.
 
 Common Options:
 
-`{string|regexp} heading` - Heading, H1-H6 element, in the document after which the parser will look for a TABLE; optional, default: none. The parser does a string comparison or regexp match looking for first occurrence of `heading` value in a heading element. If neither `heading` or `id` are specified then data output starts with first TABLE element found in the document.
+`{string|regexp} heading` - Heading, H1-H6 element, in the document after which the parser will look for a TABLE; optional, default: none. The parser does a string comparison or regexp match looking for first occurrence of `heading` value in a heading element. If neither `heading` or `id` are specified then data output contains all rows from all tables found in the document.
 
-`{string} id` - TABLE element id attribute in the document to parse for tabular data; optional, default: none. The parser does a string comparison of the `id` value in TABLE elements ID attribute. If neither `heading` or `id` are specified then data output starts with first TABLE element found in the document.
+`{string} id` - TABLE element id attribute in the document to parse for tabular data; optional, default: none. The parser does a string comparison of the `id` value in TABLE elements ID attribute. If neither `heading` or `id` are specified then data output contains all rows from all tables found in the document.
 
 `{number} cells` - Minimum number of cells in tabular data; optional, default: 1. The parser will NOT output rows with less than `cells` number of cells.
 
-`{boolean|number} trim` - trim whitespace from output values, false (0) = no trimming, true (1) = both, 2 = starting only, 3 = trailing only, default: true.
+`{boolean} trim` - trim whitespace from output values, default: true.
 
 ## Streaming Usage
 
