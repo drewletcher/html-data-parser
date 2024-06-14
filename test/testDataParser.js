@@ -40,7 +40,7 @@ async function test(options) {
   if (await test({ url: "https://www.sos.state.tx.us/elections/historical/jan2024.shtml" })) return 1;
 
   if (await test({ data: "./test/data/html/helloworld.html", id: "cosmic" })) return 1;
-  if (await test({ data: "./test/data/html/ansi.html", heading: "Congressional Districts" })) return 1;
+  if (await test({ data: "./test/data/html/ansi.html", heading: /Congress.* Districts/ })) return 1;
   if (await test({ data: "./test/data/html/texas_jan2024.shtml" })) return 1;
 
 })();
