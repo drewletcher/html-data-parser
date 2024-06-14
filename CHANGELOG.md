@@ -1,5 +1,7 @@
 html-data-parser Change Log
 
+- version 1.0.4
+  - feature: allow regular expression for matching options.heading and options.id
 - version 1.0.3
   - refactor: by default output all rows of all tables
   - feature: RepeatCellTransform handle missing value (empty cell)
