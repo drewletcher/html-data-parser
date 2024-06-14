@@ -39,7 +39,7 @@ hdp [--options=filename.json] <URL|filename.html> [<output-file>] [--heading=tit
   `--format`     - output data format JSON, CSV or rows (JSON arrays), default JSON.
 ```
 
-Note: If the `hdp` command conflicts with another program on your system use `hpddataparser` instead.
+Note: If the `hdp` command conflicts with another program on your system use `hdpdataparser` instead.
 
 ### Options File
 
@@ -60,6 +60,8 @@ The options file supports options for all html-data-parser modules.
   "id": "",
   // cells - minimum number of cells for a data row, default = 1.
   "cells": 1,
+  // newlines - preserve new lines in cell data, default: false.
+  "newlines": false,
   // trim whitespace from output values, default: true.
   "trim": true,
 
@@ -150,6 +152,8 @@ Common Options:
 `{string} id` - TABLE element id attribute in the document to parse for tabular data; optional, default: none. The parser does a string comparison of the `id` value in TABLE elements ID attribute. If neither `heading` or `id` are specified then data output contains all rows from all tables found in the document.
 
 `{number} cells` - Minimum number of cells in tabular data; optional, default: 1. The parser will NOT output rows with less than `cells` number of cells.
+
+`{boolean} newlines` - Preserve new lines in cell data; optional, default: false. When false newlines will be replaced by spaces. Preserving newlines characters will keep the formatting of multiline text such as descriptions. Though, newlines are problematic for cells containing multi-word identifiers and keywords that might be wrapped in the cell text.
 
 `{boolean} trim` - trim whitespace from output values, default: true.
 
@@ -291,7 +295,7 @@ RepeatHeadingTransform constructor takes an options object with the following fi
 
 ### FormatCSV and FormatJSON
 
-The `hpddataparser` CLI program uses the FormatCSV and FormatJSON transforms to covert Javascript Objects into strings that can be saved to a file.
+The `hdpdataparser` CLI program uses the FormatCSV and FormatJSON transforms to covert Javascript Objects into strings that can be saved to a file.
 
 ```javascript
 const { PdfDataReader, RowAsObjectTransform, FormatCSV } = require("html-data-parser");

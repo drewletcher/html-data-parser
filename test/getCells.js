@@ -7,7 +7,7 @@
 const sax = require("sax");
 const fs = require("node:fs");
 
-var output = fs.openSync("./test/output/getCells.json", "w");
+var output = fs.openSync("./test/output/sax/getCells.json", "w");
 fs.writeSync(output, "[\n");
 
 //// table processing

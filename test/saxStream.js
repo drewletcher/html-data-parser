@@ -7,7 +7,7 @@
 const sax = require("sax");
 const fs = require("node:fs");
 
-let output = fs.openSync("./test/output/saxStream.txt", "w");
+let output = fs.openSync("./test/output/sax/saxStream.txt", "w");
 
 const strict = false; // set to false for HTML mode
 const options = {
@@ -101,11 +101,11 @@ saxStream.on("script", function (s) {
 // same chunks coming in also go out.
 fs.createReadStream("./test/data/html/texas_jan2024.shtml")
   .pipe(saxStream)
-  .pipe(fs.createWriteStream("./test/output/saxStream.html"));
+  .pipe(fs.createWriteStream("./test/output/sax/saxStream.html"));
 /*
 // pipe is supported, and it's readable/writable
 // same chunks coming in also go out.
 fs.createReadStream("https://www.census.gov/library/reference/code-lists/ansi.html")
 .pipe(saxStream)
-.pipe(fs.createWriteStream("./test/output/saxStream.html"));
+.pipe(fs.createWriteStream("./test/output/sax/saxStream.html"));
 */

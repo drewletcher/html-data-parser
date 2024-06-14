@@ -1,10 +1,6 @@
 {
-  "url": "./test/data/html/texas_jan2024.shtml",
-  "output": "./test/output/hdp/repeat_heading.json",
-  "format": "json",
-  "pages": "2-5",
-  "pageHeader": 48,
-  "heading": "Active",
-  "stopHeading": "Active",
-  "RepeatHeading.header": "County:1"
+  "url": "./test/data/html/az_jan2024.htm",
+  "heading": "Congressional Districts - Active",
+  "RepeatHeading.header": "County:1",
+  "output": "./test/output/hdp/repeat_heading.json"
 }

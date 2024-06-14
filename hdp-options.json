@@ -4,6 +4,7 @@
   "output": "",
   "heading": null,
   "cells": 1,
+  "newlines": false,
   "trim": true,
   "RowAsObject.headers": null,
   "RepeatCell.column": null,

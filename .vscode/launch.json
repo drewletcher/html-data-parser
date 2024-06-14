@@ -57,7 +57,7 @@
     {
       "type": "node",
       "name": "RowAsObjectTransform",
-      "program": "${workspaceFolder}/test/testRowAsObjectTransform.js",
+      "program": "${workspaceFolder}/test/testRowAsObject.js",
       "request": "launch",
       "skipFiles": [
         "<node_internals>/**"
@@ -88,9 +88,9 @@
     },
     {
       "type": "node",
-      "name": "cli helloworld json",
-      "program": "Html-data-parser.js",
-      "args": [ ".\\test\\data\\Html\\helloworld.Html", "--headers=Greating" ],
+      "name": "hdp helloworld json",
+      "program": "html-data-parser.js",
+      "args": [ ".\\test\\data\\html\\helloworld.html", "--id=global", "--headers=Greating" ],
       "outputCapture": "std",
       "skipFiles": [
         "<node_internals>/**"
@@ -98,9 +98,9 @@
     },
     {
       "type": "node",
-      "name": "cli helloworld csv",
-      "program": "Html-data-parser.js",
-      "args": [ ".\\test\\data\\Html\\helloworld.Html", "--headers=Greating", "--format=csv" ],
+      "name": "hdp helloworld csv",
+      "program": "html-data-parser.js",
+      "args": [ ".\\test\\data\\html\\helloworld.html", "--id=cosmic", "--headers=Greating", "--format=csv" ],
       "outputCapture": "std",
       "skipFiles": [
         "<node_internals>/**"
@@ -108,9 +108,9 @@
     },
     {
       "type": "node",
-      "name": "cli helloworld rows",
-      "program": "Html-data-parser.js",
-      "args": [ ".\\test\\data\\Html\\helloworld.Html", "--headers=Greating", "--format=rows" ],
+      "name": "hdp helloworld rows",
+      "program": "html-data-parser.js",
+      "args": [ ".\\test\\data\\html\\helloworld.html", "--format=rows" ],
       "outputCapture": "std",
       "skipFiles": [
         "<node_internals>/**"
@@ -118,9 +118,9 @@
     },
     {
       "type": "node",
-      "name": "cli ClassCodes csv",
-      "program": "Html-data-parser.js",
-      "args": [ ".\\test\\data\\Html\\ClassCodes.Html", ".\\test\\output\\cli\\ClassCodes.csv", "--format=csv" ],
+      "name": "hdp ANSI csv",
+      "program": "html-data-parser.js",
+      "args": [ ".\\test\\data\\html\\ansi.html", ".\\test\\output\\hdp\\ansi.csv", "--format=csv" ],
       "outputCapture": "std",
       "skipFiles": [
         "<node_internals>/**"
@@ -128,9 +128,9 @@
     },
     {
       "type": "node",
-      "name": "cli ClassCodes json",
-      "program": "Html-data-parser.js",
-      "args": [ ".\\test\\data\\Html\\ClassCodes.Html", ".\\test\\output\\cli\\ClassCodes.json", "--format=json" ],
+      "name": "hdp ANSI json",
+      "program": "html-data-parser.js",
+      "args": [ ".\\test\\data\\html\\ansi.html", ".\\test\\output\\hdp\\ansi.json", "--heading=Congressional Districts", "--format=json" ],
       "outputCapture": "std",
       "skipFiles": [
         "<node_internals>/**"
@@ -138,8 +138,8 @@
     },
     {
       "type": "node",
-      "name": "cli RepeatCell",
-      "program": "Html-data-parser.js",
+      "name": "hdp RepeatCell",
+      "program": "html-data-parser.js",
       "args": [ "--options=.\\test\\optionsRepeatCell.json" ],
       "outputCapture": "std",
       "skipFiles": [
@@ -148,8 +148,8 @@
     },
     {
       "type": "node",
-      "name": "cli RepeatHeading",
-      "program": "Html-data-parser.js",
+      "name": "hdp RepeatHeading",
+      "program": "html-data-parser.js",
       "args": [ "--options=.\\test\\optionsRepeatHeading.json" ],
       "outputCapture": "std",
       "skipFiles": [

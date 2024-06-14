@@ -31,11 +31,9 @@ async function test(options) {
 
 (async () => {
   if (await test({
-    url: "./test/data/html/state_voter_registration_jan2024.html",
-    pages: [ 1 ],
-    pageHeader: 64,
-    cells: 7,
-    repeatingHeaders: true,
+    "url": "./test/data/html/az_jan2024.htm",
+    "heading": "Counties - Active",
+    "cells": 9,
     "RepeatCell.column": 0
   })) return 1;
 })();
