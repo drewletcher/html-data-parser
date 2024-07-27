@@ -33,6 +33,6 @@ async function test(options) {
   if (await test({
     "url": "./test/data/html/az_jan2024.htm",
     "heading": "Congressional Districts - Active",
-    "RepeatHeading.header": "County:1"
+    "RepeatHeading.header": "County:1:0"
   })) return 1;
 })();

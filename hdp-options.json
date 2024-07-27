@@ -7,7 +7,9 @@
   "cells": 1,
   "newlines": false,
   "trim": true,
+  "RowAsObject.hasHeader": true,
   "RowAsObject.headers": null,
   "RepeatCell.column": null,
-  "RepeatHeading.header": null
+  "RepeatHeading.header": null,
+  "RepeatHeading.hasHeader": true
 }
