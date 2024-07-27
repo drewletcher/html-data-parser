@@ -30,7 +30,7 @@
     "url": "https://github.com/drewletcher/html-data-parser/issues"
   },
   "devDependencies": {
-    "eslint": "^9.4.0"
+    "eslint": "^9.8.0"
   },
   "dependencies": {
     "colors": "^1.4.0",
