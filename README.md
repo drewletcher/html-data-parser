@@ -58,8 +58,8 @@ The options file supports options for all html-data-parser modules.
   "heading": null,
   // id - TABLE element id attribute to find in document.
   "id": "",
-  // cells - minimum number of cells for a data row, default = 1.
-  "cells": 1,
+  // cells - minimum number of cells for a data row, default = 1-256.
+  "cells": "1-256",
   // newlines - preserve new lines in cell data, default: false.
   "newlines": false,
   // trim whitespace from output values, default: true.

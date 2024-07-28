@@ -4,7 +4,7 @@
   "output": "",
   "heading": null,
   "id": null,
-  "cells": 1,
+  "cells": "1-256",
   "newlines": false,
   "trim": true,
   "RowAsObject.hasHeader": true,

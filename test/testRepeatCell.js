@@ -33,7 +33,7 @@ async function test(options) {
   if (await test({
     "url": "./test/data/html/az_jan2024.htm",
     "heading": "Counties - Active",
-    "cells": 9,
+    "cells": "9-10",
     "RepeatCell.column": 0
   })) return 1;
 })();
