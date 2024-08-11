@@ -20,9 +20,20 @@ declare class HtmlDataParser {
         newlines?: boolean;
         trim?: boolean;
     });
-    options: any;
+    options: {
+        cells: number;
+        trim: boolean;
+    } & {
+        url: string;
+        data: Buffer | string;
+        heading?: string;
+        id?: string;
+        cells?: number;
+        newlines?: boolean;
+        trim?: boolean;
+    };
     saxOptions: {
-        trim: any;
+        trim: boolean;
     };
     rows: any[];
     rowNum: number;
