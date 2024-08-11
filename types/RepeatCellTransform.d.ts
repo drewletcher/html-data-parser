@@ -3,8 +3,8 @@ declare const _exports: {
         column?: number | undefined;
     } | undefined): {
         column: any;
-        repeatLength: number;
         repeatValue: string;
+        prevLen: number;
         /**
          * Internal call from streamWriter to process an object
          * @param {Object} row
@@ -12,11 +12,6 @@ declare const _exports: {
          * @param {Function} callback
          */
         _transform(row: Object, encoding: string, callback: Function): void;
-        /**
-         *
-         * @param {Function} callback
-         */
-        _flush(callback: Function): void;
     };
 };
 export = _exports;

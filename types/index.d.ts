@@ -17,10 +17,13 @@ export const HtmlDataReader: {
 };
 export const RowAsObjectTransform: {
     new (options?: {
+        hasHeader?: Object | undefined;
         headers?: string[] | undefined;
     } | undefined): {
         headers: any;
+        hasHeader: any;
         _transform(row: Object, encoding: string, callback: Function): void;
+        _headers: Object | undefined;
     };
 };
 export const RepeatCellTransform: {
@@ -28,22 +31,23 @@ export const RepeatCellTransform: {
         column?: number | undefined;
     } | undefined): {
         column: any;
-        repeatLength: number;
         repeatValue: string;
+        prevLen: number;
         _transform(row: Object, encoding: string, callback: Function): void;
-        _flush(callback: Function): void;
     };
 };
 export const RepeatHeadingTransform: {
     new (options?: {
         header?: string | undefined;
+        hasHeader?: boolean | undefined;
     } | undefined): {
-        columnHeader: any;
-        columnIndex: any;
-        repeatValue: string;
+        header: any;
+        headerIndex: any;
+        dataIndex: any;
+        hasHeader: any;
+        subHeading: string;
         count: number;
         _transform(row: Object, encoding: string, callback: Function): void;
-        _flush(callback: Function): void;
     };
 };
 export const FormatCSV: {

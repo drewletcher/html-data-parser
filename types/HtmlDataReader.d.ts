@@ -10,7 +10,6 @@ declare class HtmlDataReader {
         url: URL | string;
         data: Uint8Array | string;
     });
-    started: boolean;
     options: {
         url: URL | string;
         data: Uint8Array | string;

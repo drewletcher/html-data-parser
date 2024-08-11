@@ -21,7 +21,6 @@ declare class HtmlDataParser {
         trim?: boolean | undefined;
     });
     options: {
-        cells: number;
         trim: boolean;
     } & {
         url?: string | URL | undefined;
@@ -35,25 +34,43 @@ declare class HtmlDataParser {
     saxOptions: {
         trim: boolean;
     };
+    cells: {
+        min: number;
+        max: number;
+        heading: number;
+    };
     rows: any[];
     rowNum: number;
+    started: boolean;
+    paused: boolean;
+    cancelled: boolean;
     /**
      * Load and parse the HTML document.
      * @returns Rows an array containing arrays of data values.
      * If using an event listener the return value will be an empty array.
      */
     parse(): Promise<any[] | undefined>;
+    saxStream: any;
+    pause(): void;
+    resume(): void;
+    cancel(): void;
     /**
-     * Emits or appends data to output.
      *
-     * @param {*} row is an array of data values
+     * @param {*} rowlen
+     * @returns
      */
-    output(row: any): void;
+    inCellRange(rowlen: any): boolean;
     /**
     *
     * @param {Object} pattern - options.heading value
     * @param {String} text - text to compare
     */
     compareText(pattern: Object, text: string): any;
+    /**
+     * Emits or appends data to output.
+     *
+     * @param {*} row is an array of data values
+     */
+    output(row: any): Promise<void>;
 }
 //# sourceMappingURL=HtmlDataParser.d.ts.map

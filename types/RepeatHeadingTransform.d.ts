@@ -1,10 +1,13 @@
 declare const _exports: {
     new (options?: {
         header?: string | undefined;
+        hasHeader?: boolean | undefined;
     } | undefined): {
-        columnHeader: any;
-        columnIndex: any;
-        repeatValue: string;
+        header: any;
+        headerIndex: any;
+        dataIndex: any;
+        hasHeader: any;
+        subHeading: string;
         count: number;
         /**
          * Internal call from streamWriter to process an object
@@ -13,11 +16,6 @@ declare const _exports: {
          * @param {Function} callback
          */
         _transform(row: Object, encoding: string, callback: Function): void;
-        /**
-         *
-         * @param {Function} callback
-         */
-        _flush(callback: Function): void;
     };
 };
 export = _exports;
