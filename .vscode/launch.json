@@ -88,6 +88,7 @@
     },
     {
       "type": "node",
+      "request": "launch",
       "name": "hdp helloworld json",
       "program": "html-data-parser.js",
       "args": [ ".\\test\\data\\html\\helloworld.html", "--id=global", "--headers=Greating" ],
@@ -98,6 +99,7 @@
     },
     {
       "type": "node",
+      "request": "launch",
       "name": "hdp helloworld csv",
       "program": "html-data-parser.js",
       "args": [ ".\\test\\data\\html\\helloworld.html", "--id=cosmic", "--headers=Greating", "--format=csv" ],
@@ -108,6 +110,7 @@
     },
     {
       "type": "node",
+      "request": "launch",
       "name": "hdp helloworld rows",
       "program": "html-data-parser.js",
       "args": [ ".\\test\\data\\html\\helloworld.html", "--format=rows" ],
@@ -118,6 +121,7 @@
     },
     {
       "type": "node",
+      "request": "launch",
       "name": "hdp ANSI csv",
       "program": "html-data-parser.js",
       "args": [ ".\\test\\data\\html\\ansi.html", ".\\test\\output\\hdp\\ansi.csv", "--format=csv" ],
@@ -128,6 +132,7 @@
     },
     {
       "type": "node",
+      "request": "launch",
       "name": "hdp ANSI json",
       "program": "html-data-parser.js",
       "args": [ ".\\test\\data\\html\\ansi.html", ".\\test\\output\\hdp\\ansi.json", "--heading=Congressional Districts", "--format=json" ],
@@ -138,6 +143,7 @@
     },
     {
       "type": "node",
+      "request": "launch",
       "name": "hdp RepeatCell",
       "program": "html-data-parser.js",
       "args": [ "--options=.\\test\\optionsRepeatCell.json" ],
@@ -148,6 +154,7 @@
     },
     {
       "type": "node",
+      "request": "launch",
       "name": "hdp RepeatHeading",
       "program": "html-data-parser.js",
       "args": [ "--options=.\\test\\optionsRepeatHeading.json" ],
