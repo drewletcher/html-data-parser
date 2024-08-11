@@ -25,7 +25,7 @@ var options = {
   url: "",
   format: "json",
   output: "",
-  cells: 1,
+  cells: "1-256",
   trim: true
 }
 
@@ -54,8 +54,6 @@ async function parseArgs() {
       }
       else if (nv[ 0 ] === "--cells")
         options.cells = parseInt(nv[ 1 ]);
-      else if (nv[ 0 ] === "--pages")
-        options.pages = nv[ 1 ];
       else if (nv[ 0 ] === "--heading")
         options.heading = nv[ 1 ];
       else if (nv[ 0 ] === "--id")
@@ -68,24 +66,6 @@ async function parseArgs() {
     ++i;
   }
 
-  if (typeof options.pages === "string") {
-    // convert pages arg
-    let pages = options.pages.split(",")
-    options.pages = []
-
-    for (let p of pages) {
-      let range = p.split("-");
-      if (range.length === 1) {
-        // single page
-        options.pages.push(parseInt(range[ 0 ]));
-      }
-      else {
-        // expand range into individual pages
-        for (let i = parseInt(range[ 0 ]); i <= parseInt(range[ 1 ]); i++)
-          options.pages.push(i);
-      }
-    }
-  }
 }
 
 /**

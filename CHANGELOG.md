@@ -1,4 +1,4 @@
-html-data-parser Change Log
+# html-data-parser Change Log
 
 - version 1.0.4
   - feature: allow regular expression for matching options.heading and options.id
