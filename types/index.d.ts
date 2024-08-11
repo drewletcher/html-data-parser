@@ -1,12 +1,12 @@
 export const HtmlDataParser: {
     new (options?: {
-        url: string;
-        data: Buffer | string;
-        heading?: string;
-        id?: string;
-        cells?: number;
-        newlines?: boolean;
-        trim?: boolean;
+        url?: string | URL | undefined;
+        data?: string | Uint8Array | undefined;
+        heading?: string | RegExp | undefined;
+        id?: string | RegExp | undefined;
+        cells?: number | undefined;
+        newlines?: boolean | undefined;
+        trim?: boolean | undefined;
     }): import("./HtmlDataParser.js");
 };
 export const HtmlDataReader: {
@@ -17,46 +17,46 @@ export const HtmlDataReader: {
 };
 export const RowAsObjectTransform: {
     new (options?: {
-        headers?: string[];
-    }): {
+        headers?: string[] | undefined;
+    } | undefined): {
         headers: any;
-        _transform(row: any, encoding: any, callback: any): void;
+        _transform(row: Object, encoding: string, callback: Function): void;
     };
 };
 export const RepeatCellTransform: {
     new (options?: {
-        column?: number;
-    }): {
+        column?: number | undefined;
+    } | undefined): {
         column: any;
         repeatLength: number;
         repeatValue: string;
-        _transform(row: any, encoding: any, callback: any): void;
-        _flush(callback: any): void;
+        _transform(row: Object, encoding: string, callback: Function): void;
+        _flush(callback: Function): void;
     };
 };
 export const RepeatHeadingTransform: {
     new (options?: {
-        header?: string;
-    }): {
+        header?: string | undefined;
+    } | undefined): {
         columnHeader: any;
         columnIndex: any;
         repeatValue: string;
         count: number;
-        _transform(row: any, encoding: any, callback: any): void;
-        _flush(callback: any): void;
+        _transform(row: Object, encoding: string, callback: Function): void;
+        _flush(callback: Function): void;
     };
 };
 export const FormatCSV: {
     new (options: any): {
         first: boolean;
-        _transform(row: any, encoding: any, callback: any): void;
+        _transform(row: Object, encoding: string, callback: Function): void;
     };
 };
 export const FormatJSON: {
     new (options: any): {
         first: boolean;
-        _transform(row: any, encoding: any, callback: any): void;
-        _flush(callback: any): void;
+        _transform(row: Object, encoding: string, callback: Function): void;
+        _flush(callback: Function): void;
     };
 };
 //# sourceMappingURL=index.d.ts.map

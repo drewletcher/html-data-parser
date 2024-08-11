@@ -1,18 +1,22 @@
 declare const _exports: {
     new (options?: {
-        column?: number;
-    }): {
+        column?: number | undefined;
+    } | undefined): {
         column: any;
         repeatLength: number;
         repeatValue: string;
         /**
          * Internal call from streamWriter to process an object
-         * @param {*} row
-         * @param {*} encoding
-         * @param {*} callback
+         * @param {Object} row
+         * @param {String} encoding
+         * @param {Function} callback
          */
-        _transform(row: any, encoding: any, callback: any): void;
-        _flush(callback: any): void;
+        _transform(row: Object, encoding: string, callback: Function): void;
+        /**
+         *
+         * @param {Function} callback
+         */
+        _flush(callback: Function): void;
     };
 };
 export = _exports;
