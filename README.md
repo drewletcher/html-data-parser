@@ -1,10 +1,12 @@
 # html-data-parser 1.0.x
 
-Parse, search and stream tabular data from HTML documents using Node.js and isaacs/sax-js.
+Parse and stream tabular data from HTML documents using Node.js and [isaacs/sax-js](https://github.com/isaacs/sax-js).
 
 This readme explains how to use html-data-parser in your code or as a stand-alone program.
 
 > Only supports HTML documents containing TABLE elements. Does not support parsing grid or other table like elements.
+
+Related projects: [html-data-parser](https://github.com/dictadata/html-data-parser#readme), [pdf-data-parser](https://github.com/dictadata/pdf-data-parser#readme), [xlsx-data-parser](https://github.com/dictadata/xlsx-data-parser#readme)
 
 ## Installation
 
@@ -27,14 +29,14 @@ npm install html-data-parser
 Parse tabular data from a HTML document.
 
 ```bash
-hdp [--options=filename.json] <URL|filename.html> [<output-file>] [--heading=title] [--id=name] [--cells=#] [--headers=name1,name2,...] [--format=json|csv|rows]
+hdp [--options=filename.json] [--heading=title] [--id=name] [--cells=#] [--headers=name1,name2,...] [--format=json|csv|rows] <filename|URL> [<output-file>]
 
-  `--options`    - file containing JSON object with hdp options, optional.
   `filename|URL` - path name or URL of HTML file to process, required.
   `output-file`  - local path name for output of parsed data, default stdout.
+  `--options`    - JSON or JSONC file containing JSON object with hdp options, optional.
   `--heading`    - text of heading to find in document that precedes desired data table, default none.
   `--id`         - TABLE element id attribute to find in document.
-  `--cells`      - minimum number of cells for a data row, default = 1.
+  `--cells`      - number of cells in a data row, minimum or "min-max", default = "1-256".
   `--headers`    - comma separated list of column names for data, default none the first table row contains names.
   `--format`     - output data format JSON, CSV or rows (JSON arrays), default JSON.
 ```
@@ -43,11 +45,12 @@ Note: If the `hdp` command conflicts with another program on your system use `hd
 
 ### Options File
 
-The options file supports options for all html-data-parser modules.
+The options file supports options for all html-data-parser modules. Parser will read plain JSON files or JSONC files with Javascript style comments.
 
 ```javascript
 {
-  ///// HtmlDataParser options
+  /* HtmlDataParser options */
+
   // url - local path name or URL of HTML file to process, required.
   "url": "",
   // output - local path name for output of parsed data, default stdout.
@@ -58,28 +61,34 @@ The options file supports options for all html-data-parser modules.
   "heading": null,
   // id - TABLE element id attribute to find in document.
   "id": "",
-  // cells - minimum number of cells for a data row, default = 1-256.
+  // cells - number of cells for a data row, minimum or "min-max", default = "1-256".
   "cells": "1-256",
   // newlines - preserve new lines in cell data, default: false.
   "newlines": false,
   // trim whitespace from output values, default: true.
   "trim": true,
 
-  //// RowAsObjectTransform options
-  // headers - comma separated list of column names for data, default none. When not defined the first table row encountered will be treated as column names.
-  "RowAsObject.headers": []
+  /* RowAsObjectTransform options */
+
   // hasHeaders - data has a header row, if true and headers set then headers overrides header row.
   "RowAsObject.hasHeader": true
+  // headers - comma separated list of column names for data, default none. When not defined the first table row encountered will be treated as column names.
+  "RowAsObject.headers": []
 
-  //// RepeatCellTransform options
+  /* RepeatCellTransform options */
+
   // column - column index of cell to repeat, default 0.
   "RepeatCell.column": 0
 
-  //// RepeatHeadingTransform options
+  /* RepeatHeadingTransform options */
+
+  // hasHeaders - data has a header row, if true and headers set then headers overrides header row.
+  "RepeatHeading.hasHeader": true
   // header - column name for the repeating heading field. Can optionally contain suffix :m:n with index for inserting into header and data rows.
   "RepeatHeading.header": "subheading:0:0"
-// hasHeaders - data has a header row, if true and headers set then headers overrides header row.
-  "RepeatHeading.hasHeader": true
+
+  /* HTTP options */
+  // see HTTP Options below
 
 }
 ```
@@ -123,7 +132,7 @@ optionsRepeatCell.json:
 
 ### HtmlDataParser
 
-HtmlDataParser given a HTML document will output an array of arrays (rows). Additionally, use the streaming classes PdfDataReader and RowAsObjectTransform transform to convert the arrays to Javascript objects.  With default settings HtmlDataParser will output rows in __all__ TABLE found in the document. Using [HtmlDataParser Options](#html-data-parser-options) `heading` or `id` the parser can filter content to retrieve the desired data TABLE in the document.
+HtmlDataParser given a HTML document will output an array of arrays (rows). Additionally, use the streaming classes HtmlDataReader and RowAsObjectTransform transform to convert the arrays to Javascript objects.  With default settings HtmlDataParser will output rows in __all__ TABLE found in the document. Using [HtmlDataParser Options](#html-data-parser-options) `heading` or `id` the parser can filter content to retrieve the desired data TABLE in the document.
 
 HtmlDataParser only works on a certain subset of HTML documents specifically those that contain some TABLE elements and NOT other table like grid elements. The parser uses [isaacs/sax-js](https://github.com/isaacs/sax-js) library to transform HTML table elements into rows of cells.
 
@@ -162,18 +171,29 @@ Common Options:
 
 `{Boolean} trim` - trim whitespace from output values, default: true.
 
+### HTTP Options
+
+HTTP requests are mode using Node.js HTTP modules. See the source code file lib/httpRequest.js for more details.
+
+`{Object} http` - options to pass thru to HTTP request
+`{String} http.method` - HTTP method, default is "GET"
+`{Object} http.params` - object containing URL querystring parameters.
+`{Object} http.headers` - object containing HTTP headers
+`{Array}  http.cookies` - array of HTTP cookie strings
+`{String} http.auth` - string for Basic Authentication (Authorization header), i.e. "user:password".
+
 ## Streaming Usage
 
 ---
 
-### PdfDataReader
+### HtmlDataReader
 
-PdfDataReader is a Node.js stream reader implemented with the Object mode option. It uses HtmlDataParser to stream one data row (array) per chunk.
+HtmlDataReader is a Node.js stream reader implemented with the Object mode option. It uses HtmlDataParser to stream one data row (array) per chunk.
 
 ```javascript
-const { PdfDataReader } = require("html-data-parser");
+const { HtmlDataReader } = require("html-data-parser");
 
-let reader = new PdfDataReader({url: "filename.html"});
+let reader = new HtmlDataReader({url: "filename.html"});
 var rows = [];
 
 reader.on('data', (row) => {
@@ -189,19 +209,19 @@ reader.on('error', (err) => {
 })
 ```
 
-### PdfDataReader Options
+### HtmlDataReader Options
 
-PdfDataReader constructor options are the same as [HtmlDataParser Options](#html-data-parser-options).
+HtmlDataReader constructor options are the same as [HtmlDataParser Options](#html-data-parser-options).
 
 ### RowAsObjectTransform
 
-PdfDataReader operates in Object Mode. The reader outputs arrays (rows). To convert rows into Javascript objects use the RowAsObjectTransform transform.  PdfDataReader operates in Object mode where a chunk is a Javascript Object of <name,value> pairs.
+HtmlDataReader operates in Object Mode. The reader outputs arrays (rows). To convert rows into Javascript objects use the RowAsObjectTransform transform.  HtmlDataReader operates in Object mode where a chunk is a Javascript Object of <name,value> pairs.
 
 ```javascript
-const { PdfDataReader, RowAsObjectTransform } = require("html-data-parser");
+const { HtmlDataReader, RowAsObjectTransform } = require("html-data-parser");
 const { pipeline } = require('node:stream/promises');
 
-let reader = new PdfDataReader(options);
+let reader = new HtmlDataReader(options);
 let transform1 = new RowAsObjectTransform(options);
 let writable = <some writable that can handle Object Mode data>
 
@@ -214,7 +234,7 @@ RowAsObjectTransform constructor takes an options object with the following fiel
 
 `{String[]} headers` - array of cell property names; optional, default: none. If a headers array is not specified then parser will assume the first row found contains cell property names.
 
-`{boolean} hasHeaders` - data has a header row, if true and headers options is set then provided headers override header row. Default is true.
+`{Boolean} hasHeaders` - data has a header row, if true and headers options is set then provided headers override header row. Default is true.
 
 If a row is encountered with more cells than in the headers array then extra cell property names will be the ordinal position. For example if the data contains five cells, but only three headers where specified.  Specifying `options = { headers: [ 'name', 'type', 'info' ] }` then the Javascript objects in the stream will contain `{ "name": "value1", "type": "value2", "info": "value3", "4": "value4", "5": "value5" }`.
 
@@ -243,10 +263,10 @@ Dewitt          44  JUL 2023     52,297
 ### Example Usage
 
 ```javascript
-const { PdfDataReader, RepeatCellTransform } = require("html-data-parser");
+const { HtmlDataReader, RepeatCellTransform } = require("html-data-parser");
 const { pipeline } = require('node:stream/promises');
 
-let reader = new PdfDataReader(options);
+let reader = new HtmlDataReader(options);
 let transform1 = new RepeatCellTransform({ column: 0 });
 let writable = <some writable that can handle Object Mode data>
 
@@ -284,10 +304,10 @@ Total:          150  506,253
 ```
 
 ```javascript
-const { PdfDataReader, RepeatHeadingTransform } = require("html-data-parser");
+const { HtmlDataReader, RepeatHeadingTransform } = require("html-data-parser");
 const { pipeline } = require('node:stream/promises');
 
-let reader = new PdfDataReader(options);
+let reader = new HtmlDataReader(options);
 let transform1 = new RepeatHeadingTransform({header: "County:1:0"});
 let writable = <some writable that can handle Object Mode data>
 
@@ -300,17 +320,17 @@ RepeatHeadingTransform constructor takes an options object with the following fi
 
 `{String} header` - column name for the repeating heading field. Can optionally contain an index of where to insert the header in the header row. Default "heading:0".
 
-`{boolean} hasHeaders` - data has a header row, if true and headers options is set then provided headers override header row. Default is true.
+`{Boolean} hasHeaders` - data has a header row, if true and headers options is set then provided headers override header row. Default is true.
 
 ### FormatCSV and FormatJSON
 
 The `hdpdataparser` CLI program uses the FormatCSV and FormatJSON transforms to covert Javascript Objects into strings that can be saved to a file.
 
 ```javascript
-const { PdfDataReader, RowAsObjectTransform, FormatCSV } = require("html-data-parser");
+const { HtmlDataReader, RowAsObjectTransform, FormatCSV } = require("html-data-parser");
 const { pipeline } = require('node:stream/promises');
 
-let reader = new PdfDataReader(options);
+let reader = new HtmlDataReader(options);
 let transform1 = new RowAsObjectTransform(options);
 let transform2 = new FormatCSV();
 
