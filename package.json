@@ -1,6 +1,6 @@
 {
   "name": "html-data-parser",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Parse, search and stream HTML tabular data using Node.js and isaacs/sax-js.",
   "author": "Drew O. Letcher",
   "license": "MIT",
@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "colors": "^1.4.0",
+    "jsonc-parser": "^3.3.1",
     "sax": "github:isaacs/sax-js#semver:1.4"
   }
 }
