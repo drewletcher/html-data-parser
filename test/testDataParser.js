@@ -31,6 +31,7 @@ async function test(options) {
   }
   catch (err) {
     console.error(err);
+    return 1;
   }
 }
 
