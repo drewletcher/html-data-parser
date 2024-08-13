@@ -1,5 +1,12 @@
 # html-data-parser Change Log
 
+- version 1.0.5
+  - enhancement: options.cells accepts minimum number or "min-max" range
+  - enhancement: transform options hasHeader, header:m:n
+  - enhancement: handle stream pause/resume
+  - feature: support Typescript types
+  - feature: add JSONC support for options files
+  - refactor: error handling for file not found
 - version 1.0.4
   - feature: allow regular expression for matching options.heading and options.id
 - version 1.0.3
