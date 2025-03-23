@@ -1,12 +1,13 @@
 {
   "name": "html-data-parser",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Parse, search and stream HTML tabular data using Node.js and isaacs/sax-js.",
   "author": "Drew O. Letcher",
   "license": "MIT",
   "keywords": [
-    "dictadata",
     "html",
+    "table",
+    "tabular data",
     "parser"
   ],
   "type": "commonjs",
@@ -24,11 +25,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dictadata/html-data-parser.git"
+    "url": "git+https://gitlab.com/drewletcher/html-data-parser.git"
   },
-  "homepage": "https://github.com/dictadata/html-data-parser#readme",
+  "homepage": "https://gitlab.com/drewletcher/html-data-parser#readme",
   "bugs": {
-    "url": "https://github.com/dictadata/html-data-parser/issues"
+    "url": "https://gitlab.com/drewletcher/html-data-parser/issues"
   },
   "devDependencies": {
     "eslint": "^9.8.0"

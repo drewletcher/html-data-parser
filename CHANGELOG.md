@@ -1,5 +1,7 @@
 # html-data-parser Change Log
 
+- version 1.0.6:
+  - refactor: change project group to gitlab:drewletcher
 - version 1.0.5
   - enhancement: options.cells accepts minimum number or "min-max" range
   - enhancement: transform options hasHeader, header:m:n
@@ -14,7 +16,7 @@
   - feature: RepeatCellTransform handle missing value (empty cell)
   - bug fix: RepeatCellTransform splice repeating column at array index
   - tests: for RepeatCell and RepeatHeader transforms
-  - tests: testrunner.bat, use tr_launcher CLI test app from @dictadata/lib project
+  - tests: testrunner.bat, use tr_launcher CLI test app from @oby4/storage-lib project
 - version 1.0.2
   - feature: add options.id to match for TABLE id attribute
 - version 1.0.1
