@@ -6,7 +6,7 @@ This readme explains how to use html-data-parser in your code or as a stand-alon
 
 > Only supports HTML documents containing TABLE elements. Does not support parsing grid or other table like elements.
 
-Related projects: [html-data-parser](https://github.com/dictadata/html-data-parser#readme), [pdf-data-parser](https://github.com/dictadata/pdf-data-parser#readme), [xlsx-data-parser](https://github.com/dictadata/xlsx-data-parser#readme)
+Related projects: [html-data-parser](https://gitlab.com/drewletcher/html-data-parser#readme), [pdf-data-parser](https://gitlab.com/drewletcher/pdf-data-parser#readme), [xlsx-data-parser](https://gitlab.com/drewletcher/xlsx-data-parser#readme)
 
 ## Installation
 
