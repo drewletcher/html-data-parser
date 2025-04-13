@@ -43,12 +43,12 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}/test/testDataParser.js"
+      "program": "${workspaceFolder}/test/HtmlDataParser.test.js"
     },
     {
       "type": "node",
       "name": "HtmlDataReader",
-      "program": "${workspaceFolder}/test/testDataReader.js",
+      "program": "${workspaceFolder}/test/HtmlDataReader.test.js",
       "request": "launch",
       "skipFiles": [
         "<node_internals>/**"
@@ -57,7 +57,7 @@
     {
       "type": "node",
       "name": "RowAsObjectTransform",
-      "program": "${workspaceFolder}/test/testRowAsObject.js",
+      "program": "${workspaceFolder}/test/RowAsObject.test.js",
       "request": "launch",
       "skipFiles": [
         "<node_internals>/**"
@@ -66,7 +66,7 @@
     {
       "type": "node",
       "name": "RepeatCellTransform",
-      "program": "${workspaceFolder}/test/testRepeatCell.js",
+      "program": "${workspaceFolder}/test/RepeatCell.test.js",
       "request": "launch",
       "skipFiles": [
         "<node_internals>/**"
@@ -75,7 +75,7 @@
     {
       "type": "node",
       "name": "RepeatHeadingTransform",
-      "program": "${workspaceFolder}/test/testRepeatHeading.js",
+      "program": "${workspaceFolder}/test/RepeatHeading.test.js",
       "request": "launch",
       "skipFiles": [
         "<node_internals>/**"
@@ -146,7 +146,7 @@
       "request": "launch",
       "name": "hdp RepeatCell",
       "program": "html-data-parser.js",
-      "args": [ "--options=.\\test\\optionsRepeatCell.json" ],
+      "args": [ "--options=.\\test\\RepeatCell.options.json" ],
       "outputCapture": "std",
       "skipFiles": [
         "<node_internals>/**"
@@ -157,7 +157,7 @@
       "request": "launch",
       "name": "hdp RepeatHeading",
       "program": "html-data-parser.js",
-      "args": [ "--options=.\\test\\optionsRepeatHeading.json" ],
+      "args": [ "--options=.\\test\\RepeatHeading.options.json" ],
       "outputCapture": "std",
       "skipFiles": [
         "<node_internals>/**"
