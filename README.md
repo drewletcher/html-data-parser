@@ -6,7 +6,7 @@ This readme explains how to use html-data-parser in your code or as a stand-alon
 
 > Only supports HTML documents containing TABLE elements. Does not support parsing grid or other table like elements.
 
-Related projects: [html-data-parser](https://gitlab.com/drewletcher/html-data-parser#readme), [pdf-data-parser](https://gitlab.com/drewletcher/pdf-data-parser#readme), [xlsx-data-parser](https://gitlab.com/drewletcher/xlsx-data-parser#readme)
+Related projects: [pdf-data-parser](https://gitlab.com/drewletcher/pdf-data-parser#readme), [text-data-parser](https://gitlab.com/drewletcher/text-data-parser#readme), [xlsx-data-parser](https://gitlab.com/drewletcher/xlsx-data-parser#readme)
 
 ## Installation
 
@@ -26,22 +26,22 @@ npm install html-data-parser
 
 ---
 
-Parse tabular data from a HTML document.
+Parse tabular data from an HTML document or URL.
 
 ```bash
-hdp [--options=filename.json] [--heading=title] [--id=name] [--cells=#] [--headers=name1,name2,...] [--format=json|csv|rows] <filename|URL> [<output-file>]
+hdp <filename|URL> <output-file> --options=filename.json --heading=title --id=name --cells=# --headers=name1,name2,... --format=csv|json|rows
 
   `filename|URL` - path name or URL of HTML file to process, required.
   `output-file`  - local path name for output of parsed data, default stdout.
-  `--options`    - JSON or JSONC file containing JSON object with hdp options, optional.
+  `--options`    - JSON or JSONC file containing JSON object with hdp options, default: hdp.options.json.
   `--heading`    - text of heading to find in document that precedes desired data table, default none.
   `--id`         - TABLE element id attribute to find in document.
   `--cells`      - number of cells in a data row, minimum or "min-max", default = "1-256".
   `--headers`    - comma separated list of column names for data, default none the first table row contains names.
-  `--format`     - output data format JSON, CSV or rows (JSON arrays), default JSON.
+  `--format`     - output data format CSV, JSON, or ROWS (JSON array of arrays), default JSON.
 ```
 
-Note: If the `hdp` command conflicts with another program on your system use `hdpdataparser` instead.
+Note: If the `hdp` command conflicts with another program on your system use `htmldataparser` instead.
 
 ### Options File
 
@@ -114,9 +114,9 @@ hdp https://www.sos.state.tx.us/elections/historical/jan2024.shtml ./test/output
 ```
 
 ```bash
-hdp --options="./test/optionsRepeatCell.json"
+hdp --options="./test/RepeatCell.options.json"
 
-optionsRepeatCell.json:
+RepeatCell.options.json:
 {
   "url": "./test/data/html/texas_jan2024.shtml",
   "output": "./test/output/hdp/repeat_cell.json",
@@ -156,8 +156,8 @@ async function parseDocument() {
 HtmlDataParser constructor takes an options object with the following fields. One of `url` or `data` arguments is required.
 
 `{String|URL} url` - The local path or URL of the HTML document.
-
 `{String|Uint8Array} data` - HTML document in a string.
+`{Readable} rs` - Readable stream for the HTML document.
 
 Common Options:
 
