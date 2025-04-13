@@ -1,6 +1,10 @@
 # html-data-parser Change Log
 
-- version 1.0.6:
+- version 1.0.7
+  - feature: HtmlDataParser add options.rs for passing in a Readable stream
+  - refactor: hdp CLI updated options handling
+  - bug fix: optional JSON output of rows as arrays
+- version 1.0.6
   - refactor: change project group to gitlab:drewletcher
 - version 1.0.5
   - enhancement: options.cells accepts minimum number or "min-max" range
