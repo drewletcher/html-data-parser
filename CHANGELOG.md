@@ -1,5 +1,7 @@
 # html-data-parser Change Log
 
+- version 1.0.8
+  - refactor: change project group to github:drewletcher
 - version 1.0.7
   - feature: HtmlDataParser add options.rs for passing in a Readable stream
   - refactor: hdp CLI updated options handling
