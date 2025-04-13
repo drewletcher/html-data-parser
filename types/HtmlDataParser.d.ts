@@ -5,6 +5,7 @@ declare class HtmlDataParser {
      * @param {Object}   options
      * @param {String|URL}  [options.url] - the URL or local file name of the .html
      * @param {String|Uint8Array} [options.data] - HTML file data in an array, instead of using url
+     * @param {Readable}          [options.rs] readable stream with source data
      * @param {String|RegExp}   [options.heading] - HTML section heading where data is located, default: none (first table)
      * @param {String|RegExp}   [options.id] - TABLE element's id attribute to find in document.
      * @param {Number}   [options.cells] - minimum number of cells in a tabular data, default: 1
@@ -13,7 +14,8 @@ declare class HtmlDataParser {
      */
     constructor(options?: {
         url?: string | URL | undefined;
-        data?: string | Uint8Array | undefined;
+        data?: string | Uint8Array<ArrayBuffer> | undefined;
+        rs?: any;
         heading?: string | RegExp | undefined;
         id?: string | RegExp | undefined;
         cells?: number | undefined;
@@ -24,7 +26,8 @@ declare class HtmlDataParser {
         trim: boolean;
     } & {
         url?: string | URL | undefined;
-        data?: string | Uint8Array | undefined;
+        data?: string | Uint8Array<ArrayBuffer> | undefined;
+        rs?: Readable;
         heading?: string | RegExp | undefined;
         id?: string | RegExp | undefined;
         cells?: number | undefined;

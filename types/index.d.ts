@@ -1,7 +1,8 @@
 export const HtmlDataParser: {
     new (options?: {
         url?: string | URL | undefined;
-        data?: string | Uint8Array | undefined;
+        data?: string | Uint8Array<ArrayBuffer> | undefined;
+        rs?: any;
         heading?: string | RegExp | undefined;
         id?: string | RegExp | undefined;
         cells?: number | undefined;
@@ -19,7 +20,7 @@ export const RowAsObjectTransform: {
     new (options?: {
         hasHeader?: Object | undefined;
         headers?: string[] | undefined;
-    } | undefined): {
+    }): {
         headers: any;
         hasHeader: any;
         _transform(row: Object, encoding: string, callback: Function): void;
@@ -29,7 +30,7 @@ export const RowAsObjectTransform: {
 export const RepeatCellTransform: {
     new (options?: {
         column?: number | undefined;
-    } | undefined): {
+    }): {
         column: any;
         repeatValue: string;
         prevLen: number;
@@ -40,7 +41,7 @@ export const RepeatHeadingTransform: {
     new (options?: {
         header?: string | undefined;
         hasHeader?: boolean | undefined;
-    } | undefined): {
+    }): {
         header: any;
         headerIndex: any;
         dataIndex: any;
@@ -58,6 +59,7 @@ export const FormatCSV: {
 };
 export const FormatJSON: {
     new (options: any): {
+        options: any;
         first: boolean;
         _transform(row: Object, encoding: string, callback: Function): void;
         _flush(callback: Function): void;
