@@ -2,12 +2,12 @@
  * test/testReader.js
  */
 
-const HtmlDataReader = require("../lib/HtmlDataReader");
-const FormatJSON = require('../lib/FormatJSON');
-const { finished } = require('stream/promises');
-const fs = require("fs");
-const path = require("path");
-const compareFiles = require("./_compareFiles");
+import HtmlDataReader from "../lib/HtmlDataReader.js";
+import FormatJSON from '../lib/FormatJSON.js';
+import { finished } from 'stream/promises';
+import fs from "node:fs";
+import path from "node:path";
+import compareFiles from "./_compareFiles.js";
 
 async function test(options) {
   let outputName = path.parse(options.url || options.data).name;

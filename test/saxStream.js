@@ -4,8 +4,8 @@
  * Test SAX.js stream.
  */
 
-const sax = require("sax");
-const fs = require("node:fs");
+import sax from "sax";
+import fs from "node:fs";
 
 let output = fs.openSync("./test/output/sax/saxStream.txt", "w");
 

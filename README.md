@@ -71,7 +71,7 @@ The options file supports options for all html-data-parser modules. Parser will 
   /* RowAsObjectTransform options */
 
   // hasHeaders - data has a header row, if true and headers set then headers overrides header row.
-  "RowAsObject.hasHeader": true
+  "RowAsObject.hasHeader": false
   // headers - comma separated list of column names for data, default none. When not defined the first table row encountered will be treated as column names.
   "RowAsObject.headers": []
 
@@ -141,7 +141,7 @@ Rows and Cells terminology is used instead of Rows and Columns because the conte
 ### Basic Usage
 
 ```javascript
-const { HtmlDataParser } = require("html-data-parser");
+import { HtmlDataParser } from "html-data-parser";
 
 let parser = new HtmlDataParser({url: "filename.html"});
 
@@ -191,7 +191,7 @@ HTTP requests are mode using Node.js HTTP modules. See the source code file lib/
 HtmlDataReader is a Node.js stream reader implemented with the Object mode option. It uses HtmlDataParser to stream one data row (array) per chunk.
 
 ```javascript
-const { HtmlDataReader } = require("html-data-parser");
+import { HtmlDataReader } from "html-data-parser";
 
 let reader = new HtmlDataReader({url: "filename.html"});
 var rows = [];
@@ -218,8 +218,8 @@ HtmlDataReader constructor options are the same as [HtmlDataParser Options](#htm
 HtmlDataReader operates in Object Mode. The reader outputs arrays (rows). To convert rows into Javascript objects use the RowAsObjectTransform transform.  HtmlDataReader operates in Object mode where a chunk is a Javascript Object of <name,value> pairs.
 
 ```javascript
-const { HtmlDataReader, RowAsObjectTransform } = require("html-data-parser");
-const { pipeline } = require('node:stream/promises');
+import { HtmlDataReader, RowAsObjectTransform } from "html-data-parser";
+import { pipeline } from 'node:stream/promises';
 
 let reader = new HtmlDataReader(options);
 let transform1 = new RowAsObjectTransform(options);
@@ -263,8 +263,8 @@ Dewitt          44  JUL 2023     52,297
 ### Example Usage
 
 ```javascript
-const { HtmlDataReader, RepeatCellTransform } = require("html-data-parser");
-const { pipeline } = require('node:stream/promises');
+import { HtmlDataReader, RepeatCellTransform } from "html-data-parser";
+import { pipeline } from 'node:stream/promises';
 
 let reader = new HtmlDataReader(options);
 let transform1 = new RepeatCellTransform({ column: 0 });
@@ -304,8 +304,8 @@ Total:          150  506,253
 ```
 
 ```javascript
-const { HtmlDataReader, RepeatHeadingTransform } = require("html-data-parser");
-const { pipeline } = require('node:stream/promises');
+import { HtmlDataReader, RepeatHeadingTransform } from "html-data-parser";
+import { pipeline } from 'node:stream/promises';
 
 let reader = new HtmlDataReader(options);
 let transform1 = new RepeatHeadingTransform({header: "County:1:0"});
@@ -327,8 +327,8 @@ RepeatHeadingTransform constructor takes an options object with the following fi
 The `hdpdataparser` CLI program uses the FormatCSV and FormatJSON transforms to covert Javascript Objects into strings that can be saved to a file.
 
 ```javascript
-const { HtmlDataReader, RowAsObjectTransform, FormatCSV } = require("html-data-parser");
-const { pipeline } = require('node:stream/promises');
+import { HtmlDataReader, RowAsObjectTransform, FormatCSV } from "html-data-parser";
+import { pipeline } from 'node:stream/promises';
 
 let reader = new HtmlDataReader(options);
 let transform1 = new RowAsObjectTransform(options);

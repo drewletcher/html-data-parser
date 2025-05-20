@@ -4,8 +4,8 @@
  * Test SAX.js parser.
  */
 
-const sax = require("sax");
-const fs = require("node:fs/promises");
+import sax from "sax";
+import fs from "node:fs/promises";
 
 const strict = false; // set to false for html-mode
 const options = {

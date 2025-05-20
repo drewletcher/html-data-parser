@@ -2,10 +2,10 @@
  * test/testParser.js
  */
 
-const HtmlDataParser = require("../lib/HtmlDataParser");
-const fs = require("fs");
-const path = require("path");
-const compareFiles = require("./_compareFiles");
+import HtmlDataParser from "../lib/HtmlDataParser.js";
+import fs from "node:fs";
+import path from "node:path";
+import compareFiles from "./_compareFiles.js";
 
 async function test(options) {
   try {
