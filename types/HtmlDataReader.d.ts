@@ -1,5 +1,4 @@
-export = HtmlDataReader;
-declare class HtmlDataReader {
+export default class HtmlDataReader {
     /**
      *
      * @param {Object}      options
@@ -22,5 +21,5 @@ declare class HtmlDataReader {
      */
     _read(size: any): Promise<void>;
 }
-import HtmlDataParser = require("./HtmlDataParser");
+import HtmlDataParser from "./HtmlDataParser.js";
 //# sourceMappingURL=HtmlDataReader.d.ts.map

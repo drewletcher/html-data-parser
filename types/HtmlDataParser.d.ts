@@ -1,5 +1,4 @@
-export = HtmlDataParser;
-declare class HtmlDataParser {
+export default class HtmlDataParser {
     /**
      *
      * @param {Object}   options
@@ -14,7 +13,7 @@ declare class HtmlDataParser {
      */
     constructor(options?: {
         url?: string | URL | undefined;
-        data?: string | Uint8Array<ArrayBuffer> | undefined;
+        data?: string | Uint8Array<ArrayBufferLike> | undefined;
         rs?: any;
         heading?: string | RegExp | undefined;
         id?: string | RegExp | undefined;
@@ -26,7 +25,7 @@ declare class HtmlDataParser {
         trim: boolean;
     } & {
         url?: string | URL | undefined;
-        data?: string | Uint8Array<ArrayBuffer> | undefined;
+        data?: string | Uint8Array<ArrayBufferLike> | undefined;
         rs?: Readable;
         heading?: string | RegExp | undefined;
         id?: string | RegExp | undefined;
