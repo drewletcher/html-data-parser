@@ -1,4 +1,4 @@
-# html-data-parser 1.0.x
+# html-data-parser 1.1.x
 
 Parse and stream tabular data from HTML documents using Node.js and [isaacs/sax-js](https://github.com/isaacs/sax-js).
 
@@ -6,7 +6,11 @@ This readme explains how to use html-data-parser in your code or as a stand-alon
 
 > Only supports HTML documents containing TABLE elements. Does not support parsing grid or other table like elements.
 
-Related projects: [pdf-data-parser](https://github.com/drewletcher/pdf-data-parser#readme), [text-data-parser](https://github.com/drewletcher/text-data-parser#readme), [xlsx-data-parser](https://github.com/drewletcher/xlsx-data-parser#readme)
+Related projects:
+[html-link-parser](https://github.com/drewletcher/html-link-parser#readme) |
+[text-data-parser](https://github.com/drewletcher/text-data-parser#readme) |
+[pdf-data-parser](https://github.com/drewletcher/pdf-data-parser#readme) |
+[xlsx-data-parser](https://github.com/drewletcher/xlsx-data-parser#readme)
 
 ## Installation
 
@@ -132,11 +136,11 @@ RepeatCell.options.json:
 
 ### HtmlDataParser
 
-HtmlDataParser given a HTML document will output an array of arrays (rows). Additionally, use the streaming classes HtmlDataReader and RowAsObjectTransform transform to convert the arrays to Javascript objects.  With default settings HtmlDataParser will output rows in __all__ TABLE found in the document. Using [HtmlDataParser Options](#html-data-parser-options) `heading` or `id` the parser can filter content to retrieve the desired data TABLE in the document.
+HtmlDataParser given a HTML document will output an array of arrays (rows). Use the streaming classes HtmlDataReader and RowAsObjectTransform transform to convert the arrays to Javascript objects.  With default settings HtmlDataParser will output rows in __all__ TABLE found in the document. Using [HtmlDataParser Options](#html-data-parser-options) `heading` or `id` the parser can filter content to retrieve the desired data TABLE in the document.
 
 HtmlDataParser only works on a certain subset of HTML documents specifically those that contain some TABLE elements and NOT other table like grid elements. The parser uses [isaacs/sax-js](https://github.com/isaacs/sax-js) library to transform HTML table elements into rows of cells.
 
-Rows and Cells terminology is used instead of Rows and Columns because the content in a HTML document flows rather than strict rows/columns of database query results. Some rows may have more cells than other rows. For example a heading or description paragraph will be a row (array) with one cell (string).  See [Notes](#notes) below.
+Rows and Cells terminology is used instead of Rows and Columns because the content in a HTML document flows rather than being strict rows/columns like database query results. Some rows may have more cells than other rows. For example a heading or description paragraph will be a row (array) with one cell (string).  See [Notes](#notes) below.
 
 ### Basic Usage
 
@@ -324,7 +328,7 @@ RepeatHeadingTransform constructor takes an options object with the following fi
 
 ### FormatCSV and FormatJSON
 
-The `hdpdataparser` CLI program uses the FormatCSV and FormatJSON transforms to covert Javascript Objects into strings that can be saved to a file.
+The `hdpdataparser` CLI program uses the FormatCSV and FormatJSON transforms to stringify Javascript objects that can be saved to a file.
 
 ```javascript
 import { HtmlDataReader, RowAsObjectTransform, FormatCSV } from "html-data-parser";

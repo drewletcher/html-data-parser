@@ -1,5 +1,7 @@
 # html-data-parser Change Log
 
+- version 1.1.10
+  - enhancement: follow HTTP 301,302 redirects
 - version 1.1.9
   - refactor: convert project to ECMAScript modules
   - refactor: options hasHeader default is false
