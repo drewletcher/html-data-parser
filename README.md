@@ -2,7 +2,7 @@
 
 Parse and stream tabular data from HTML documents using Node.js and [isaacs/sax-js](https://github.com/isaacs/sax-js).
 
-This readme explains how to use html-data-parser in your code or as a stand-alone program.
+This readme explains how to use html-data-parser in your code or as a console program using the command line interface (CLI).
 
 > Only supports HTML documents containing TABLE elements. Does not support parsing grid or other table like elements.
 
@@ -14,23 +14,21 @@ Related projects:
 
 ## Installation
 
-For use as command line utility. Requires Node.js 18+.
-
-```bash
-npm -g install html-data-parser
-```
-
 For use as module in a Node.js project. See Developers Guide below.
 
 ```bash
 npm install html-data-parser
 ```
 
-## CLI Program
+For use as command line utility. Requires Node.js 18+.
 
----
+```bash
+npm -g install html-data-parser
+```
 
-Parse tabular data from an HTML document or URL.
+## Command Line Interface
+
+Parse tabular data from an HTML document.
 
 ```bash
 hdp <filename|URL> <output-file> --options=filename.json --heading=title --id=name --cells=# --headers=name1,name2,... --format=csv|json|rows
@@ -49,7 +47,7 @@ Note: If the `hdp` command conflicts with another program on your system use `ht
 
 ### Options File
 
-The options file supports options for all html-data-parser modules. Parser will read plain JSON files or JSONC files with Javascript style comments.
+The options file supports options for all html-data-parser modules. Parser will read plain JSON files or JSONC files with Javascript style comments. The default name of the options file is `hdp.options.json` located in the current working directory.
 
 ```javascript
 {
@@ -132,17 +130,9 @@ RepeatCell.options.json:
 
 ## Developer Guide
 
----
-
-### HtmlDataParser
-
-HtmlDataParser given a HTML document will output an array of arrays (rows). Use the streaming classes HtmlDataReader and RowAsObjectTransform transform to convert the arrays to Javascript objects.  With default settings HtmlDataParser will output rows in __all__ TABLE found in the document. Using [HtmlDataParser Options](#html-data-parser-options) `heading` or `id` the parser can filter content to retrieve the desired data TABLE in the document.
-
-HtmlDataParser only works on a certain subset of HTML documents specifically those that contain some TABLE elements and NOT other table like grid elements. The parser uses [isaacs/sax-js](https://github.com/isaacs/sax-js) library to transform HTML table elements into rows of cells.
-
-Rows and Cells terminology is used instead of Rows and Columns because the content in a HTML document flows rather than being strict rows/columns like database query results. Some rows may have more cells than other rows. For example a heading or description paragraph will be a row (array) with one cell (string).  See [Notes](#notes) below.
-
 ### Basic Usage
+
+The parser processes the entire document then returns the row data as an array of arrays.
 
 ```javascript
 import { HtmlDataParser } from "html-data-parser";
@@ -155,9 +145,53 @@ async function parseDocument() {
 }
 ```
 
+### Using Event Interface
+
+Listen to parser events and process each row as it is parsed from the document.
+
+```javascript
+import { HtmlDataParser } from "html-data-parser";
+
+let parser = new HtmlDataParser({url: "filename.html"});
+
+parser.on('data', (row) => {
+  // process row, row is an array of cell values
+  rows.push(row)
+});
+
+parser.on('end', () => {
+});
+
+parser.on('error', (err) => {
+  // log error
+})
+```
+
+### Using Stream Interface
+
+Use the NodeJS Stream interface to process rows as they are parsed from the document.
+
+```javascript
+import { HtmlDataReader } from "html-data-parser";
+import { pipeline } from 'node:stream/promises';
+
+let reader = new HtmlDataReader(options);
+let writer = `<some writable that can handle Object Mode data>`
+
+await pipeline(reader, writer);
+```
+
+## Class HtmlDataParser
+
+`HtmlDataParser` given a HTML document will output an array of arrays (rows). Use the streaming classes `HtmlDataReader` and `RowAsObjectTransform` transform to convert the arrays to Javascript objects.  With default settings `HtmlDataParser will output rows in __all__ TABLE found in the document. Using [HtmlDataParser Options](#html-data-parser-options) `heading` or `id` the parser can filter content to retrieve the desired data TABLE in the document.
+
+`HtmlDataParser` only works on a certain subset of HTML documents specifically those that contain some TABLE elements and NOT other table like grid elements. The parser uses [isaacs/sax-js](https://github.com/isaacs/sax-js) library to transform HTML table elements into rows of cells.
+
+Rows and Cells terminology is used instead of Rows and Columns because the content in a HTML document flows rather than being strict rows/columns like database query results. Some rows may have more cells than other rows. For example a heading or description paragraph will be a row (array) with one cell (string).  See [Notes](#notes) below.
+
 ### HtmlDataParser Options
 
-HtmlDataParser constructor takes an options object with the following fields. One of `url` or `data` arguments is required.
+`HtmlDataParser` constructor takes an options object with the following fields. One of `url` or `data` arguments is required.
 
 `{String|URL} url` - The local path or URL of the HTML document.
 `{String|Uint8Array} data` - HTML document in a string.
@@ -186,40 +220,17 @@ HTTP requests are mode using Node.js HTTP modules. See the source code file lib/
 `{Array}  http.cookies` - array of HTTP cookie strings
 `{String} http.auth` - string for Basic Authentication (Authorization header), i.e. "user:password".
 
-## Streaming Usage
+## Class HtmlDataReader
 
----
-
-### HtmlDataReader
-
-HtmlDataReader is a Node.js stream reader implemented with the Object mode option. It uses HtmlDataParser to stream one data row (array) per chunk.
-
-```javascript
-import { HtmlDataReader } from "html-data-parser";
-
-let reader = new HtmlDataReader({url: "filename.html"});
-var rows = [];
-
-reader.on('data', (row) => {
-  rows.push(row)
-});
-
-reader.on('end', () => {
-  // do something with the rows
-});
-
-reader.on('error', (err) => {
-  // log error
-})
-```
+`HtmlDataReader` is a Node.js stream reader implemented with the Object mode option. It uses `HtmlDataParser` event interface to stream one data row (array) per chunk.
 
 ### HtmlDataReader Options
 
-HtmlDataReader constructor options are the same as [HtmlDataParser Options](#html-data-parser-options).
+`HtmlDataReader` constructor options are the same as [HtmlDataParser Options](#html-data-parser-options).
 
-### RowAsObjectTransform
+## Class RowAsObjectTransform
 
-HtmlDataReader operates in Object Mode. The reader outputs arrays (rows). To convert rows into Javascript objects use the RowAsObjectTransform transform.  HtmlDataReader operates in Object mode where a chunk is a Javascript Object of <name,value> pairs.
+`HtmlDataReader` operates in Object Mode. The reader outputs arrays (rows). To convert rows into Javascript objects use the `RowAsObjectTransform` transform.  `RowAsObjectTransform` operates in Object mode where output is a Javascript Object of <name,value> pairs.
 
 ```javascript
 import { HtmlDataReader, RowAsObjectTransform } from "html-data-parser";
@@ -227,14 +238,14 @@ import { pipeline } from 'node:stream/promises';
 
 let reader = new HtmlDataReader(options);
 let transform1 = new RowAsObjectTransform(options);
-let writable = <some writable that can handle Object Mode data>
+let writable = `<some writable that can handle Object Mode data>`
 
 await pipeline(reader, transform1, writable);
 ```
 
 ### RowAsObjectTransform Options
 
-RowAsObjectTransform constructor takes an options object with the following fields.
+`RowAsObjectTransform` constructor takes an options object with the following fields.
 
 `{String[]} headers` - array of cell property names; optional, default: none. If a headers array is not specified then parser will assume the first row found contains cell property names.
 
@@ -242,9 +253,30 @@ RowAsObjectTransform constructor takes an options object with the following fiel
 
 If a row is encountered with more cells than in the headers array then extra cell property names will be the ordinal position. For example if the data contains five cells, but only three headers where specified.  Specifying `options = { headers: [ 'name', 'type', 'info' ] }` then the Javascript objects in the stream will contain `{ "name": "value1", "type": "value2", "info": "value3", "4": "value4", "5": "value5" }`.
 
-### RepeatCellTransform
+## Class RepeatCellTransform
 
-The RepeatCellTransform will normalize data the was probably generated by a report writer. The specified cell will be repeated in following rows that contain one less cell. In the following example "Dewitt" will be repeated in rows 2 and 3.
+`RepeatCellTransform` will normalize data the was probably generated by a report writer. The specified cell will be repeated in following rows that contain one less cell.
+
+```javascript
+import { HtmlDataReader, RepeatCellTransform } from "html-data-parser";
+import { pipeline } from 'node:stream/promises';
+
+let reader = new HtmlDataReader(options);
+let transform1 = new RepeatCellTransform({ column: 0 });
+let writable = <some writable that can handle Object Mode data>
+
+await pipeline(reader, transform1, writable);
+```
+
+### RepeatCellTransform Options
+
+`RepeatCellTransform` constructor takes an options object with the following fields.
+
+`{Number} column` - column index of cell to repeat, default 0.
+
+### Example
+
+In this example "Dewitt" will be repeated in rows 2 and 3.
 
 **HTML Document**
 
@@ -264,28 +296,32 @@ Dewitt          44  JUL 2023     52,297
 [ "Dewitt", "44", "JAN 2024", "51,712" ]
 ```
 
-### Example Usage
+## Class RepeatHeadingTransform
+
+`RepeatHeadingTransform` will normalize data the was probably generated by a report writer. Subheadings are rows containing a single cell interspersed in data rows. The header name is inserted in to the header row. The subheading value will be repeated in rows that follow until another subheading is encountered.
 
 ```javascript
-import { HtmlDataReader, RepeatCellTransform } from "html-data-parser";
+import { HtmlDataReader, RepeatHeadingTransform } from "html-data-parser";
 import { pipeline } from 'node:stream/promises';
 
 let reader = new HtmlDataReader(options);
-let transform1 = new RepeatCellTransform({ column: 0 });
+let transform1 = new RepeatHeadingTransform({header: "County:1:0"});
 let writable = <some writable that can handle Object Mode data>
 
 await pipeline(reader, transform1, writable);
 ```
 
-### RepeatCellTransform Options
+### RepeatHeadingTransform Options
 
-RepeatCellTransform constructor takes an options object with the following fields.
+`RepeatHeadingTransform` constructor takes an options object with the following fields.
 
-`{Number} column` - column index of cell to repeat, default 0.
+`{String} header` - column name for the repeating heading field. Can optionally contain an index of where to insert the header in the header row. Default "heading:0".
 
-### RepeatHeadingTransform
+`{Boolean} hasHeaders` - data has a header row, if true and headers options is set then provided headers override header row. Default is true.
 
-The RepeatHeadingTransform will normalize data the was probably generated by a report writer. Subheadings are rows containing a single cell interspersed in data rows. The header name is inserted in to the header row. The subheading value will be repeated in rows that follow until another subheading is encountered. In the following example `options = {header: "County:1:0"}`.
+### Example
+
+In this example `options = {header: "County:1:0"}`.
 
 **HTML Document**
 
@@ -307,28 +343,9 @@ Total:          150  506,253
 [ "Congressional District 5", "Total:", "150", "506,253" ]
 ```
 
-```javascript
-import { HtmlDataReader, RepeatHeadingTransform } from "html-data-parser";
-import { pipeline } from 'node:stream/promises';
+## Class FormatCSV and FormatJSON
 
-let reader = new HtmlDataReader(options);
-let transform1 = new RepeatHeadingTransform({header: "County:1:0"});
-let writable = <some writable that can handle Object Mode data>
-
-await pipeline(reader, transform1, writable);
-```
-
-### RepeatHeadingTransform Options
-
-RepeatHeadingTransform constructor takes an options object with the following fields.
-
-`{String} header` - column name for the repeating heading field. Can optionally contain an index of where to insert the header in the header row. Default "heading:0".
-
-`{Boolean} hasHeaders` - data has a header row, if true and headers options is set then provided headers override header row. Default is true.
-
-### FormatCSV and FormatJSON
-
-The `hdpdataparser` CLI program uses the FormatCSV and FormatJSON transforms to stringify Javascript objects that can be saved to a file.
+The `hdpdataparser` CLI program uses the `FormatCSV` and `FormatJSON` transforms to stringify Javascript objects that can be saved to a file.
 
 ```javascript
 import { HtmlDataReader, RowAsObjectTransform, FormatCSV } from "html-data-parser";
@@ -345,11 +362,11 @@ await pipeline(reader, transform1, transform2, process.stdout);
 
 ---
 
-In the source code the html-data-parser.js program and the Javascript files in the /test folder are good examples of using the library modules.
+In the source code the `html-data-parser.js` program and the Javascript files in the `/test` folder are good examples of using the library modules.
 
 ### Hello World
 
-[HelloWorld.html](./test/data/html/helloworld.html) is a single page HTML document with the string "Hello, world!" positioned on the page. The HtmlDataParser output is one row with one cell.
+[HelloWorld.html](./test/data/html/helloworld.html) is a single page HTML document with the string "Hello, world!" positioned on the page. The `HtmlDataParser` output is one row with one cell.
 
 ```json
 [
@@ -357,7 +374,7 @@ In the source code the html-data-parser.js program and the Javascript files in t
 ]
 ```
 
-To transform the row array into an object specify the headers option to RowAsObjectTransform transform.
+To transform the row array into an object specify the headers option to `RowAsObjectTransform` transform.
 
 ```javascript
 let transform = new RowAsObjectTransform({
