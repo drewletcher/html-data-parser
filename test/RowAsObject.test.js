@@ -20,6 +20,10 @@ async function test(options) {
 
   let reader = new HtmlDataReader(options);
 
+  reader.on("head", (head) => {
+    console.log("head: ".yellow + JSON.stringify(head).yellow);
+  });
+
   let transform1 = new RowAsObjectTransform(options);
   let transform2 = new FormatJSON();
 

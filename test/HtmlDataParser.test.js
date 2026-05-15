@@ -18,6 +18,11 @@ async function test(options) {
     }
 
     let parser = new HtmlDataParser(options);
+
+    parser.on("head", (head) => {
+      console.log("head: ".yellow + JSON.stringify(head).yellow);
+    });
+
     let rows = await parser.parse();
 
     let outputFile = "./test/output/HtmlDataParser/" + outputName + ".json";

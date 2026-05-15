@@ -126,6 +126,11 @@ async function parseArgs() {
     let pipes = [];
 
     let reader = new HtmlDataReader(options);
+
+    reader.on("head", (head) => {
+      console.log("head: ".yellow + JSON.stringify(head).yellow);
+    });
+
     pipes.push(reader);
 
     if (Object.hasOwn( options,  "RepeatCell.column") || Object.hasOwn( options, "column")) {

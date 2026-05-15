@@ -154,9 +154,14 @@ import { HtmlDataParser } from "html-data-parser";
 
 let parser = new HtmlDataParser({url: "filename.html"});
 
+parser.on('head', (head) => {
+  // triggered by /HEAD end tag
+  // zero or one event per document
+  // see head object below
+})
+
 parser.on('data', (row) => {
   // process row, row is an array of cell values
-  rows.push(row)
 });
 
 parser.on('end', () => {
@@ -165,6 +170,15 @@ parser.on('end', () => {
 parser.on('error', (err) => {
   // log error
 })
+```
+
+```javascript
+head = {
+  url,       // starting url
+  title,     // text from <head><title> element
+  redirect,  // HTTP status code of last redirect - 301, 302, 307 or 308
+  location   // URL of last redirect
+}
 ```
 
 ### Using Stream Interface
