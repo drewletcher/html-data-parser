@@ -1,14 +1,14 @@
 {
   "name": "html-data-parser",
-  "version": "1.1.12",
+  "version": "1.1.13",
   "description": "Parse, search and stream HTML tabular data using Node.js and isaacs/sax-js.",
   "author": "Drew O. Letcher",
   "license": "MIT",
   "keywords": [
     "html",
     "table",
-    "tabular data",
-    "parser"
+    "parser",
+    "scraper"
   ],
   "type": "module",
   "engines": {

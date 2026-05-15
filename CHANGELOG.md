@@ -1,5 +1,7 @@
 # html-data-parser Change Log
 
+- version 1.1.13
+  - enhancement: emit parser 'head' event
 - version 1.1.12
   - enhancement: follow HTTP 307,308 redirects
 - version 1.1.11
